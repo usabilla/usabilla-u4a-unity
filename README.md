@@ -17,6 +17,7 @@ The following topics will be covered in this readme
 * Show Campaign / Send Event
 * Callback from SDK
 * Customize Campaign Banner
+* Masking Private Identifiable Information
 
 ## Installation
 
@@ -86,6 +87,31 @@ All Image for the Theme must also be placed in the `StreamingAssets`. The Native
       cancelButtonBgAssetName - the name of the image used as background for the button (Optional)
       cancelButtonTextColor - the text color as a #RGB string for the button (Optional)
 
+## Masking Private Identifiable Information
+The SDK has an option to mask (when data is submitted to the back-end) the data from input texts, specifically `Text Input` and `Text Area`. Please note that the an email input field is not being masked.
+
+It matches a list of RegEx and replaces them by the "X" character by default.
+To apply masking, create a DataMask object, populate it, and use the
+
+        Bridge.setDataMasking(datamask);
+
+method to apply the masking. See Appendix 2, for an example
+
+To remove the previously set mask, call the method with an empty DataMask object
+    
+        DataMask mask = new DataMask();
+        Bridge.setDataMasking(mask);
+
+The SDK provide some default masking, where emails are masked, and any digit longer than 4 digits eg credit-card numbers
+To apply the default masking, call the method with  `null`
+
+       Bridge.setDataMasking(null);
+
+
+#### DataMask
+         A DataMask object with 2 properties
+         maskCharacter - the masking character. If more than 1 charater is provideded, only the first is used
+         masks - The RegEx strings that should be used to mask data 
 
 <div style="page-break-after: always"></div>
 
@@ -124,5 +150,23 @@ All Image for the Theme must also be placed in the `StreamingAssets`. The Native
       theme.headerColor = "#345423";
 
 
+<div style="page-break-after: always"></div>
+
+### Appendix 2: Masking example
+  **Setting a mask**
+
+    DataMask mask = DataMask();
+    mask.maskCharacter = "*";
+    mask.masks = new string[] { "[0-9]{4,}",  
+          "[a - zA - Z0 - 9\\+\\.\\_\\%\\-\\+]{ 1, 256 }\\@[a - zA - Z0 - 9][a - zA - Z0 - 9\\-]{ 0,64} (\\.[a-zA - Z0 - 9][a-zA - Z0 - 9\\-]{ 0,25})+"};
+    Bridge.setDataMask(mask);
+
+  **Reset masking**
+
+    DataMask mask = DataMask();
+    Bridge.setDataMask(mask);
 
 
+**Set Default SDK masking**
+
+    Bridge.setDataMask(null);
