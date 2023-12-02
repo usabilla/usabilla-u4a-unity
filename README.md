@@ -19,7 +19,7 @@ The following topics will be covered in this readme
 * [Configure Theme](#configure-theme)
 * [Customize Campaign Banner](#customize-campaign-banner)
 * [Masking Personally Identifiable Information](#pii)
-
+* [Support](#support)
 <div id="installation"></div>
 
 ## Installation
@@ -128,6 +128,14 @@ To apply the default masking, call the method with  `null`
          masks - The RegEx strings that should be used to mask data 
 
 <div style="page-break-after: always"></div>
+
+
+
+<a id="support"></a>
+## Support
+
+If you need help, want to report an issue, or have a question please reach out to the support team via our [Help Center](https://help.surveymonkey.com/en/contact/#getfeedback) or email [support@usabilla.com](mailto:support@usabilla.com)
+
 
 ### Appendix 1: Theme example
 
